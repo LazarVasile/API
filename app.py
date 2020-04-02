@@ -1,23 +1,69 @@
-from flask import Flask, redirect, url_for, request,render_template_string, Response
-import time
-app = Flask(__name__)
+import flask
+from flask import request, jsonify
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+
+books = [
+    {   'id': 0,
+        'title': "Eloquent JavaScript, Second Edition",
+        'author': "Marijn Haverbeke",
+    },
+    {
+        'id' : 1,
+        'title' : 'Harry Potter',
+        'author' : 'J.K. Rowling'
+        
+    },
+    {
+        'id' : 2,
+        'title' : 'After',
+        'author' : 'Anna Todd'
+        
+    },
+    {
+        'id' : 3,
+        'title' : 'Ciocoii vechi si noi',
+        'author' : 'Nicolae filimon'
+        
+    },
+    {
+        'id' : 4,
+        'title' : 'Mara',
+        'author' : 'Ioan Slavici'
+        
+    }
+]
+
+@app.route('/api/v1/resources/books/all', methods = ['GET'])
+def api_all():
+    return jsonify(books)
 
 
-@app.route('/api/question', methods = ['POST'])
-def question():
+
+@app.route('/api/v1/resources/books/<string:title>', methods = ['GET'])
+def get(title):
+    for book in books:
+        if book["title"] == title:
+            return jsonify(book)
+            
+
+@app.route('/api/v1/resources/books', methods = ['POST'])
+def api_question():
     if request.method == 'POST':
-        search_text = request.form['key']
-        if len(search_text) != 0:
-            fragment = 'asd'
-            return Response("{'success':'true', 'fragment':" + str(fragment) + "}", status=200, mimetype='application/json')
+        question = request.json['question']
+        id_book = request.json['id']
+        title_book = request.json['title']
+        author_book = request.json['author']
+        if question == 'Who is the enemy of Harry Potter?':
+            # intrebarea va fi trecuta prin reteaua neuronala si se va scoate fragmentul care se potriveste
+            # vom avea nevoie si de id-ul, titlul si autorul cartii
+            return jsonify("Fragment found: question -> " + question + 
+            " id ->" + str(id_book) + " title-> " + title_book + 
+            " author-> " + author_book)
         else:
-            return Response("{'success':'false', 'message': 'Bad request! Please check the request body'}", status=400, mimetype='application/json')
+            return jsonify("Fragment nout found!");
+    # return jsonify(results)
 
+app.run()
 
-@app.route('/api/question', methods = ['GET'])
-def success():
-    return Response("{'success' : 'true', 'message' : 'Please use the POST method to send the question!!'}", status=200, mimetype='application/json' )
-
-
-if __name__ == '__main__':
-   app.run(debug = True)
