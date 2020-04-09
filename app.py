@@ -1,39 +1,14 @@
 import flask
 from flask import request, jsonify
+import json
+from scripts.prediction import fragment_prediction
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-books = [
-    {   'id': 0,
-        'title': "Eloquent JavaScript, Second Edition",
-        'author': "Marijn Haverbeke",
-    },
-    {
-        'id' : 1,
-        'title' : 'Harry Potter',
-        'author' : 'J.K. Rowling'
-        
-    },
-    {
-        'id' : 2,
-        'title' : 'After',
-        'author' : 'Anna Todd'
-        
-    },
-    {
-        'id' : 3,
-        'title' : 'Ciocoii vechi si noi',
-        'author' : 'Nicolae filimon'
-        
-    },
-    {
-        'id' : 4,
-        'title' : 'Mara',
-        'author' : 'Ioan Slavici'
-        
-    }
-]
+with open("references.json", "r", encoding="iso8859_2") as f:
+    books = json.load(f)
+
 
 @app.route('/api/v1/resources/books/all', methods = ['GET'])
 def api_all():
@@ -53,17 +28,19 @@ def api_question():
     if request.method == 'POST':
         question = request.json['question']
         id_book = request.json['id']
-        title_book = request.json['title']
-        author_book = request.json['author']
-        if question == 'Who is the enemy of Harry Potter?':
+        #title_book = request.json['title']
+        #author_book = request.json['author']
+        if len(question) > 0:
             # intrebarea va fi trecuta prin reteaua neuronala si se va scoate fragmentul care se potriveste
-            # vom avea nevoie si de id-ul, titlul si autorul cartii
-            return jsonify("Fragment found: question -> " + question + 
-            " id ->" + str(id_book) + " title-> " + title_book + 
-            " author-> " + author_book)
+            # vom avea nevoie si de id-ul
+            fragment = fragment_prediction(question,id_book)
+            return jsonify("Fragment found: question -> " + question + fragment)
         else:
-            return jsonify("Fragment nout found!");
+            return jsonify("Fragment not found!")
     # return jsonify(results)
 
 app.run()
 
+#if __name__ == "__main__":
+#    app.debug = True
+#    app.run()
