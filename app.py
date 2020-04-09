@@ -53,16 +53,14 @@ def api_question():
     if request.method == 'POST':
         question = request.json['question']
         id_book = request.json['id']
-        title_book = request.json['title']
-        author_book = request.json['author']
-        if question == 'Who is the enemy of Harry Potter?':
+        # title_book = request.json['title']
+        # author_book = request.json['author']
+        if id_book  == 1 or id_book == 2:
             # intrebarea va fi trecuta prin reteaua neuronala si se va scoate fragmentul care se potriveste
             # vom avea nevoie si de id-ul, titlul si autorul cartii
-            return jsonify("Fragment found: question -> " + question + 
-            " id ->" + str(id_book) + " title-> " + title_book + 
-            " author-> " + author_book)
+            return jsonify("Fragmentul a fost găsit")
         else:
-            return jsonify("Fragment nout found!");
+            return jsonify("Fragmentul nu a fost găsit!")
     # return jsonify(results)
 
 app.run()
