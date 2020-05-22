@@ -94,7 +94,7 @@ def delete_my_words(tokens_list):
 #x = word_lem.lemmatize("I am a boy")
 #print(x)
 
-def input_parser(message):
+def input_p(message):
     tokens_list = word_tokenize(message)
     tokens_list = delete_punctuation(tokens_list)
     tokens_list = transform_lower_case(tokens_list)

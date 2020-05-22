@@ -4,8 +4,7 @@ from keras.models import model_from_yaml
 import numpy as np
 import os
 import json
-
-from scripts.input_parser import input_parser
+import input_parser
 
 dataDir = os.path.abspath(os.path.realpath(os.path.join(os.path.dirname(__file__),'../data')))
 
@@ -21,7 +20,7 @@ def bow(sentence_words, words):
 
 def fragment_prediction(sentence, filename): #filename se paseaza cu extensia .json
 
-    sentence_words = input_parser(sentence)
+    sentence_words = input_parser.input_p(sentence)
 
     with open(os.path.join(dataDir,filename.replace(".json", '_') + "words.txt"),"r", encoding="iso8859_2") as f:
         words = json.loads(f.read())
@@ -47,9 +46,9 @@ def fragment_prediction(sentence, filename): #filename se paseaza cu extensia .j
 
     #prediction[0] -> predictia cu scorul cel mai mare
 
-    with open(os.path.join(dataDir,filename), "r", encoding="iso8859_2") as f:
+    with open(os.path.join(dataDir,filename), "r", encoding="utf-8") as f:
         book_info = json.load(f)
     
     return (book_info[str(np.argmax(prediction) + 1)]) #prediction[0]+1 pentru ca output incepe de la 0 si id-urile fragmentelor incep de la 1
     
-#print(fragment_prediction("Budapesta","2000_a_3325.json"))
+print(fragment_prediction("Budapesta","2000_a_3325.json"))
