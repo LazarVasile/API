@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+*.magnitude
 
 # C extensions
 *.so
@@ -124,3 +125,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+data/cc.ro.300.magnitude
