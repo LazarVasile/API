@@ -1,20 +1,34 @@
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, Response
 import json
-# from scriptss.prediction import prediction
-# from scriptss.input_parser import input_parser
-import time
+import os
+#import scripturi.processing
+from scripturi.network import BidirectionalAttentionFlow
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-with open("references2.json", "r", encoding="utf-8") as f:
+booksDir = os.path.abspath(os.path.realpath(os.path.join(os.path.dirname(__file__),'data', 'books')))
+
+
+bidaf_model = BidirectionalAttentionFlow(emdim=300)
+
+model_name = "bidaf.h5"
+
+bidaf_model.load_bidaf(os.path.join(os.path.dirname(__file__), 'data', model_name))
+
+print("Model loaded!")
+
+
+
+
+with open("references.json", "r", encoding="utf-8") as f:
     books = json.load(f)
 
 
 @app.route('/api/v1/resources/books/all', methods = ['GET'])
 def api_all():
-    return jsonify(books)
+    return Response(json.dumps(books),content_type="application/json; charset=utf-8")
 
 
 
@@ -32,20 +46,26 @@ def api_question():
         id_book = request.json['id']
         #title_book = request.json['title']
         #author_book = request.json['author']
-        # print(question)
-        time.sleep(5)
         if len(question) > 0:
-            print(question)
             # intrebarea va fi trecuta prin reteaua neuronala si se va scoate fragmentul care se potriveste
             # vom avea nevoie si de id-ul
-            # fragment = fragment_prediction(question,id_book)
-            # return jsonify(fragment)
-            return jsonify("Fragmentul a fost găsit. Totul este în regulă. Așa sper să fie.")
+            with open(os.path.join(booksDir,id_book.replace("json","txt")), "r", encoding="utf-8") as f:
+                book_content = f.read()
+            #deschis fisierul cu cartea in data/books
+            passage = book_content
+
+            answer = bidaf_model.predict_ans(passage, question)
+            
+            return jsonify(answer)
         else:
-            return jsonify("Fragmentul nu a fost găsit!")
+            return jsonify("Answer not found!")
     # return jsonify(results)
 
-app.run(host = '192.168.0.101')
+
+
+app.run(host="192.168.1.4")
+
+
 
 #if __name__ == "__main__":
 #    app.debug = True
