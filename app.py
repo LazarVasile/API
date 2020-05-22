@@ -22,7 +22,7 @@ print("Model loaded!")
 
 
 
-with open("references.json", "r", encoding="utf-8") as f:
+with open("references2.json", "r", encoding="utf-8") as f:
     books = json.load(f)
 
 
