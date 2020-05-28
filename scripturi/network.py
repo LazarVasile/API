@@ -47,6 +47,10 @@ def get_word_char_loc_mapping(context, context_tokens):
 
 import os  
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session  
+physical_devices = tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 from keras.engine.topology import Layer
 from keras import backend as K
@@ -541,76 +545,3 @@ class BidirectionalAttentionFlow():
             return answers
         else:
             return answers[0]
-
-
-""" emdim = 300
-max_passage_length = None
-max_query_length = None
-num_highway_layers = 1
-num_decoders = 1
-encoder_dropout = 0.0
-decoder_dropout = 0.0
-
-batch_size = 2
-shuffle_samples = False
-steps_per_epochs = None
-epochs = 50
-validation_steps = None
-workers = 1
-use_multiprocessing = False
-shuffle_batch = False
-save_history = False
-save_model_per_epoch = True
-
-#from processing import data_download_and_preprocess
-
-#data_download_and_preprocess(do_lowercase=True)
-
-bidaf_model = BidirectionalAttentionFlow(emdim=emdim, max_passage_length=max_passage_length,
-                                             max_query_length=max_query_length,
-                                             num_highway_layers=num_highway_layers, num_decoders=num_decoders,
-                                             encoder_dropout=encoder_dropout, decoder_dropout=decoder_dropout)
-
-print("Model created!") """
-
-""" train_generator, validation_generator = load_data_generators(batch_size=batch_size, emdim=emdim,
-                                                                     max_passage_length=max_passage_length,
-                                                                     max_query_length=max_query_length,
-                                                                     shuffle=shuffle_samples)
-
-print("Dataset loaded!")
-
-#bidaf_model.load_bidaf(os.path.join(os.path.dirname(__file__), 'saved_items', model_name))
-
-#print("Model loaded!")
-
-#bidaf_model.model.compile(loss=negative_avg_log_error, optimizer='adadelta', metrics=[accuracy])
-
-#print("Model compiled!")
-
-bidaf_model.train_model(train_generator, steps_per_epoch=steps_per_epochs, epochs=epochs,
-                                validation_generator=validation_generator, validation_steps=validation_steps,
-                                workers=workers, use_multiprocessing=use_multiprocessing,
-                                shuffle=shuffle_batch, save_history=save_history,
-                                save_model_per_epoch=save_model_per_epoch)
-
-
-print("Training Completed!") """
-
-
-""" model_name = "bidaf.h5"
-
-bidaf_model.load_bidaf(os.path.join(os.path.dirname(__file__), os.path.pardir, 'data', model_name))
-
-print("Model loaded!")
-
-passage = "Tesla, Inc. este un constructor de automobile electrice de înaltă performanță, din Silicon Valley. Tesla a primit o atenție deosebită când au lansat modelul de producție Tesla Roadster, prima mașină sport 100 electrică. A doua mașina produsă de Tesla este Model S, 100 electric sedan de lux."
-
-question = "Care este a doua mașina produsă de Tesla?"
-
-answer = bidaf_model.predict_ans(passage, question)
-
-print("Question: ", question)
-print("Predicted answer:", answer) """
-
-

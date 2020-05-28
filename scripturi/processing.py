@@ -26,11 +26,6 @@ class MagnitudeVectors():
         return self.vectors
 
 
-#test = MagnitudeVectors(400)
-#vectors_test = test.load_vectors()
-#print(vectors_test.query(["sfanta", "catedrala","mare"], None))
-
-
 from keras import backend as K
 
 
@@ -390,6 +385,3 @@ def data_download_and_preprocess(do_lowercase=True):
         print("Preprocessing Validation data")
         preprocess_and_write(validation_data,"validation", data_dir, do_lowercase=do_lowercase)
     print("Validation data preprocessed!")
-
-
-#data_download_and_preprocess(do_lowercase=True)
