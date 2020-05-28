@@ -1,52 +1,52 @@
 [
     {
-        "title": "Iepurii nu mor",
-        "author": "Savatie Baștovoi",
-        "id": "2008_a_3333.json"
+        "title" : "Next",
+        "author" : "Michael Crichton",
+        "id" : "2077_a_3402.json"
     },
     {
-        "title": "La iguana",
-        "author": "Alberto Vázquez-Figueroa",
-        "id": "2009_a_3334.json"
+        "title" : "Qi Gong",
+        "author" : "Daniel Reid",
+        "id" : "2142_a_3467.json"
     },
     {
-        "title": "Imperiul Soarelui",
-        "author": "J.G. Ballard",
-        "id": "2010_a_3335.json"
+        "title" : "Tot ce ea își dorește",
+        "author" : "Lynn Austin",
+        "id" : "2261_a_3586.json"
     },
     {
-        "title": "În numele statului",
-        "author": "James C Scott",
-        "id": "2012_a_3337.json"
+        "title" : "Ultimul testament",
+        "author" :"Sam Bourne",
+        "id" : "2274_a_3599.json"
     },
     {
-        "title": "Inventarul iernilor",
-        "author": "Petru Maier Bianu",
-        "id": "2020_a_3345.json"
+        "title" : "Un tip la înălțime",
+        "author" : "Marisa Mackle",
+        "id" : "2278_a_3603.json"
     },
     {
-        "title": "Iubirea secretă a Annei Frank",
-        "author": "Ellen Feldman",
-        "id": "2025_a_3350.json"
+        "title" : "Visul european",
+        "author" : "J. Rifkin",
+        "id" : "2290_a_3615.json"
     },
     {
-        "title": "Jeg",
-        "author": "Irvine Welsh",
-        "id": "2026_a_3351.json"
+        "title" : "Întâlnirea",
+        "author" : "Gabriela Adameșteanu",
+        "id" : "2331_a_3656.json"
     },
     {
-        "title": "Jemima J",
-        "author": "Jane Green",
-        "id": "2027_a_3352.json"
+        "title" : "Nevestele din Bath",
+        "author": "Wendy Holden",
+        "id": "2086_a_3411.json"
     },
     {
-        "title": "Jucătorul",
-        "author": "Feodor Dostoievski",
-        "id": "2030_a_3355.json"
+        "title" : "Rochia neagra din Latex",
+        "author" : "Lauren Henderson",
+        "id": "2162_a_3487.json"
     },
     {
-        "title": "L.A. Confidențial",
-        "author": "James Ellroy",
-        "id": "2036_a_3361.json"
+        "title" : "Vorbește, memorie",
+        "author" : "Vladimir Nabokov",
+        "id" : "2082_a_3407.json"
     }
 ]
