@@ -85,7 +85,7 @@ def api_question():
 
 
 
-app.run(host="192.168.1.4")
+app.run()
 
 
 #if __name__ == "__main__":

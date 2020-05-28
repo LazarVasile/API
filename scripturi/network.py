@@ -47,10 +47,10 @@ def get_word_char_loc_mapping(context, context_tokens):
 
 import os  
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
-import tensorflow as tf
-from keras.backend.tensorflow_backend import set_session  
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-tf.config.experimental.set_memory_growth(physical_devices[0], True)
+#import tensorflow as tf
+#from keras.backend.tensorflow_backend import set_session  
+#physical_devices = tf.config.experimental.list_physical_devices('GPU')
+#tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 from keras.engine.topology import Layer
 from keras import backend as K
