@@ -52,7 +52,12 @@ def get_chapters():
             f = open("./data/books_json/{}".format(book_id), "r")
             data = json.load(f)
             f.close()
-            return jsonify(data)   
+            my_dict = dict()
+            my_dict["Chapters"] = list()
+            for i in range(len(data["Chapters"])):
+                my_dict["Chapters"].append(i)
+            
+            return jsonify(my_dict)   
 
 @app.route('/api/v1/resources/books', methods = ['POST'])
 def api_question():
